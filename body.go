@@ -35,11 +35,11 @@ func (h handler) generateBody() error {
 
 		// Establecer el precio unitario
 		h.pdf.SetXY(400, y)
-		h.pdf.Cell(nil, fmt.Sprintf("$%.2f", item.Price))
+		h.pdf.Cell(nil, fmt.Sprintf("$ %.2f", item.Price))
 
 		// Calcular y establecer el total para este artículo
 		h.pdf.SetXY(500, y)
-		h.pdf.Cell(nil, fmt.Sprintf("$%.2f", float64(item.Quantity)*item.Price))
+		h.pdf.Cell(nil, fmt.Sprintf("$ %.2f", float64(item.Quantity)*item.Price))
 
 		// Incrementar la posición vertical para el siguiente artículo
 		y += 20

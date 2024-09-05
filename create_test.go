@@ -3,7 +3,6 @@ package pdf_invoice
 import (
 	"os"
 	"testing"
-	"time"
 )
 
 func TestGenerateInvoice(t *testing.T) {
@@ -12,25 +11,27 @@ func TestGenerateInvoice(t *testing.T) {
 
 	// Setup test data
 	testInvoice := Invoice{
-		RUT:    "90.236.18-0",
-		Type:   "",
-		Number: "258",
-		City:   "Santiago Poniente",
-		Logo:   "examples/logo.png",
-		// LogoAspectRatio: 16.9,
+		RUT:             "90.236.18-0",
+		Type:            "",
+		Number:          "258",
+		City:            "Santiago Poniente",
+		Date:            "21-04-2023",
+		Logo:            "examples/logo.png",
+		LogoAspectRatio: 16.9,
 		// Logo:               "https://www.pngitem.com/pimgs/b/485-4852378_sample-png.png",
-		Company:       "solutions software spa",
-		Description:   "servicios de creación de software",
-		Address:       "santa marta 245. talca",
-		Domain:        "solutions.com",
-		Mail:          "ventas@solutions.com",
-		Phone:         "+569 9999 9999",
-		ClientName:    "Test Client",
-		ClientAddress: "123 Test St",
-		ClientRegion:  "Test Region",
-		ClientPhone:   "123-456-7890",
-		ClientEmail:   "test@example.com",
-		Date:          time.Now(),
+		Company:        "solutions software spa",
+		Description:    "servicios de creación de software",
+		Address:        "santa marta 245. talca",
+		Domain:         "solutions.com",
+		Mail:           "ventas@solutions.com",
+		Phone:          "+569 9999 9999",
+		ClientName:     "Test Client",
+		ClientActivity: "venta de verduras",
+		ClientRUT:      "13.076.851-2",
+		ClientAddress:  "123 Test St",
+		ClientCity:     "Test Region",
+		ClientPhone:    "123-456-7890",
+		ClientEmail:    "test@example.com",
 		Items: []InvoiceItem{
 			{Description: "Test Item 1", Quantity: 3, Price: 100},
 			{Description: "Test Item 2", Quantity: 1, Price: 50},

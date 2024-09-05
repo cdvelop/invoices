@@ -1,8 +1,6 @@
 package pdf_invoice
 
 import (
-	"time"
-
 	"github.com/signintech/gopdf"
 )
 
@@ -20,7 +18,10 @@ type Invoice struct {
 	RUT             string //rut de la empresa remitente ej: 90.236.18-0
 	Type            string //Detalle, Boleta, Nota de Crédito, Nota de Débito, default: Factura Electrónica
 	Number          string
-	City            string  // Santiago Poniente, Santiago,Chillan, Valparaiso,
+	City            string // Santiago Poniente, Santiago,Chillan, Valparaiso,
+	Date            string
+	PaymentMethod   string  // medio de pago
+	Seller          string  // vendedor
 	Logo            string  // ej: logo.png
 	LogoAspectRatio float64 // ej: 1.1, 16.9 default: 4.3
 	Company         string  // ej: solutions software spa
@@ -30,13 +31,12 @@ type Invoice struct {
 	Mail            string  // ej: ventas@solutions.com
 	Phone           string
 	ClientName      string
-	BusinessLine    string
+	ClientActivity  string
+	ClientRUT       string
 	ClientAddress   string
-	ClientRegion    string
+	ClientCity      string
 	ClientPhone     string
 	ClientEmail     string
-	ClientRUT       string
-	Date            time.Time
 	Items           []InvoiceItem
 	Total           float64
 	TransferTo      string
