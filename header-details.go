@@ -4,7 +4,7 @@ func (h *handler) generateHeaderDetails() error {
 
 	const box_start = 135
 	// INICIO RECTÁNGULO ROJO DESCRIPCIÓN
-	err := h.pdf.Rectangle(h.margin_left, box_start, 581.4, 228, "D", 0, 0)
+	err := h.pdf.Rectangle(h.margin_left, box_start, 581.4, 208, "D", 0, 0)
 	if err != nil {
 		return err
 	}
@@ -14,8 +14,8 @@ func (h *handler) generateHeaderDetails() error {
 	var margin_left = h.margin_left + margin*2
 
 	// CLIENT CONTENT
-	labels := []string{"Señor(es)", "Giro", "Rut", "Dirección", "Comuna", "Teléfono", "Email"}
-	values := []string{h.invoice.ClientName, h.invoice.ClientActivity, h.invoice.ClientRUT, h.invoice.ClientAddress, h.invoice.ClientCity, h.invoice.ClientPhone, h.invoice.ClientEmail}
+	labels := []string{"Señor(es)", "Giro", "Rut", "Dirección", "Contacto"}
+	values := []string{h.invoice.ClientName, h.invoice.ClientActivity, h.invoice.ClientRUT, h.invoice.ClientAddress + " " + h.invoice.ClientCity, h.invoice.ClientPhone + " " + h.invoice.ClientEmail}
 
 	h.makeHeaderDetailsContent(margin_top, margin_left, labels, values)
 

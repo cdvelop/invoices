@@ -1,0 +1,109 @@
+package pdf_invoice
+
+import (
+	"fmt"
+
+	"github.com/signintech/gopdf"
+)
+
+// generateBody crea el cuerpo del documento PDF para la factura
+func (h handler) generateBody() error {
+
+	const box_start = 217.0
+	const y1_box_end = 642.6
+	// INICIO RECTÁNGULO ROJO DESCRIPCIÓN
+	err := h.pdf.Rectangle(h.margin_left, box_start, 581.4, y1_box_end, "D", 0, 0)
+	if err != nil {
+		return err
+	}
+
+	const header_y = box_start + 12
+	// línea horizontal encabezado
+	h.pdf.Line(h.margin_left, header_y, 581.4, header_y)
+
+	borders := 0
+	// borders := gopdf.AllBorders
+
+	opt := gopdf.CellOption{
+		Align:  gopdf.Right | gopdf.Middle,
+		Border: borders,
+		Float:  gopdf.Right,
+	}
+
+	rect := &gopdf.Rect{W: 62, H: 12}
+	h.pdf.SetFont(h.font_bold, "", 10)
+	// Establecer los encabezados de las columnas
+	h.pdf.SetXY(50, box_start)
+	h.pdf.Cell(nil, "COD.")
+	h.pdf.SetXY(92, box_start)
+	h.pdf.Cell(nil, "DETALLE")
+	h.pdf.SetXY(400, box_start)
+	h.pdf.Cell(nil, "CANT.")
+	h.pdf.SetXY(450, box_start)
+	h.pdf.Cell(nil, "PRECIO")
+	h.pdf.SetXY(498, box_start)
+	h.pdf.Cell(nil, "DTO")
+	h.pdf.SetXY(533, box_start)
+	h.pdf.Cell(nil, "TOTAL")
+
+	const x_total = 517
+	const x_dto = x_total - 17
+	const x_precio = 435
+	// linea vertical cantidad precio
+	h.pdf.Line(x_precio, header_y, x_precio, y1_box_end)
+	// linea vertical precio dto
+	h.pdf.Line(x_dto, header_y, x_dto, y1_box_end)
+	// linea vertical dto total
+	h.pdf.Line(x_total, header_y, x_total, y1_box_end)
+
+	// Dibujar una línea separadora
+	// h.pdf.Line(50, 300, 550, 300)
+
+	// Inicializar la posición vertical para los elementos
+	y := box_start + 15
+	space_y := 30.0
+	h.setDefaultFont()
+
+	// Iterar sobre los elementos de la factura
+	for _, item := range h.invoice.Items {
+		// CÓDIGO
+		h.pdf.SetXY(50, y)
+		h.pdf.CellWithOption(&gopdf.Rect{W: 30, H: 12}, item.Code, opt)
+
+		// DESCRIPCIÓN
+		h.pdf.SetXY(92, y)
+		h.pdf.MultiCellWithOption(&gopdf.Rect{W: 300, H: 20}, item.Description, gopdf.CellOption{
+			Border: borders,
+		})
+
+		// CANTIDAD
+		h.pdf.SetXY(400, y)
+		h.pdf.CellWithOption(&gopdf.Rect{W: 30, H: 12}, formatNumber(item.Quantity), opt)
+
+		// PRECIO
+		h.pdf.SetXY(x_precio, y)
+		h.pdf.CellWithOption(rect, formatNumber(item.Price), opt)
+
+		// DESCUENTO
+		if item.Discount != 0.0 {
+			h.pdf.SetXY(x_dto, y)
+			h.pdf.CellWithOption(&gopdf.Rect{W: 15, H: 12}, fmt.Sprintf("%v", item.Discount), opt)
+		}
+
+		// TOTAL
+		h.pdf.SetXY(x_total, y)
+		h.pdf.CellWithOption(rect, formatNumber(item.CalculateTotal()), opt)
+
+		// Incrementar la posición vertical para el siguiente artículo
+		y += space_y
+	}
+
+	// Rellenar las filas vacías hasta completar 15 filas
+	for i := len(h.invoice.Items); i < 15; i++ {
+		h.pdf.SetXY(x_total, y)
+		h.pdf.CellWithOption(rect, "0", opt)
+		y += space_y
+	}
+
+	return nil
+}

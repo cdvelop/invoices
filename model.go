@@ -23,7 +23,7 @@ type Invoice struct {
 	PaymentMethod   string  // medio de pago
 	Seller          string  // vendedor
 	Logo            string  // ej: logo.png
-	LogoAspectRatio float64 // ej: 1.1, 16.9 default: 4.3
+	LogoAspectRatio float32 // ej: 1.1, 16.9 default: 4.3
 	Company         string  // ej: solutions software spa
 	Description     string  // ej: servicios de creación de software
 	Address         string  // ej: santa marta 245. talca
@@ -42,13 +42,16 @@ type Invoice struct {
 	TransferTo      string
 	AccountType     string
 	AccountNumber   string
-	Discount        float64
-	TaxRetention    float64
+	Discount        float32
+	TaxRetention    float32
 	BillNumber      string
 }
 
 type InvoiceItem struct {
-	Description string
-	Quantity    int
-	Price       float64
+	Code        string  //código
+	Description string  // item x
+	Quantity    uint32  // cantidad (0 to 4294967295)
+	Price       float64 // precio ej: 1000
+	Discount    float64 //descuento en % ej: 30,15
+	total       float64
 }

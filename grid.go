@@ -35,6 +35,6 @@ func (h *handler) drawGrid() {
 		h.pdf.Text(fmt.Sprintf("%.1f", y))
 	}
 
-	fmt.Println("gridSpacing:", gridSpacing)
+	// fmt.Println("gridSpacing:", gridSpacing)
 
 }

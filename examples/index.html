@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-        <embed id="pdf" src="invoice_result.pdf" type="application/pdf" width="100%" height="1000" />
+    <embed id="pdf" src="invoice_result.pdf" type="application/pdf" width="100%" height="1000" />
+
+    <button id="shareButton">Compartir PDF</button>
+
+    <script>
 
 
-        <script>
-
-            
+        // fixed zoom embed pdf to 75%
+        window.onload = function () {
+            // document.body.style.zoom = "50%";
             // fixed zoom embed pdf to 75%
-            window.onload = function() {
-                // document.body.style.zoom = "50%";
-                // fixed zoom embed pdf to 75%
-                // let pdf = document.getElementById("pdf");
-                // console.log(pdf);
-                // pdf.style.zoom = "75%";
-
-
+            // let pdf = document.getElementById("pdf");
+            // console.log(pdf);
+            // pdf.style.zoom = "75%";
         }
 
-        </script>
+
+        document.getElementById('shareButton').addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Mi PDF',
+                        text: 'Echa un vistazo a este PDF',
+                        url: 'https://midominio.com/invoice_result.pdf'
+                    });
+                    console.log('PDF compartido con éxito');
+                } catch (error) {
+                    console.log('Error al compartir:', error);
+                }
+            } else {
+                alert('La función de compartir no está disponible en este navegador');
+            }
+        });
+
+
+    </script>
 
 </body>
+
 </html>

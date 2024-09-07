@@ -6,8 +6,8 @@ func (h *handler) setDefaultFont() {
 	h.pdf.SetTextColor(0, 0, 0)
 	//establecer ancho de linea
 	h.pdf.SetLineWidth(1)
-	// establecer color de linea plomo claro
-	h.pdf.SetStrokeColor(150, 150, 150)
+	// establecer color de linea a negro
+	h.pdf.SetStrokeColor(0, 0, 0)
 }
 
 func (h *handler) setupFont() error {

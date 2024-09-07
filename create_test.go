@@ -33,9 +33,9 @@ func TestGenerateInvoice(t *testing.T) {
 		ClientPhone:    "123-456-7890",
 		ClientEmail:    "test@example.com",
 		Items: []InvoiceItem{
-			{Description: "Test Item 1", Quantity: 3, Price: 100},
-			{Description: "Test Item 2", Quantity: 1, Price: 50},
-			{Description: "Test Item 3", Quantity: 10, Price: 1000},
+			{Code: "1111uno", Description: "Test Item 1 con texto varios y detalle del servicio prestado con linea doble para mas detalle", Quantity: 100000, Price: 10},
+			{Code: "0223df", Description: "Test Item 2", Quantity: 1, Price: 1000, Discount: 50},
+			{Description: "Test Item 3", Quantity: 2, Price: 24000000},
 		},
 		Total: 250,
 	}
