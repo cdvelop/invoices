@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 import (
 	"bytes"

@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 func (item *InvoiceItem) CalculateTotal() float64 {
 	subtotal := float64(item.Quantity) * item.Price

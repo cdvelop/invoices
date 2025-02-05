@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 func (h *handler) generateFooter() error {
 	// y := 527.0 // Ajusta este valor según sea necesario para que comience justo después del cuerpo

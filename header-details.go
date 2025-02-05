@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 func (h *handler) generateHeaderDetails() error {
 

@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 
 func TestCreateFont(t *testing.T) {
 
-	// err := ConvertFileToBytes("fonts/Rubik/RubikBold.ttf", "fontRubikBold.go", "pdf_invoice", "RubikBoldFont")
+	// err := ConvertFileToBytes("fonts/Rubik/RubikBold.ttf", "fontRubikBold.go", "invoices", "RubikBoldFont")
 	// if err != nil {
 	// 	t.Fatal(err)
 	// }

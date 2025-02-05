@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 // _ "image/jpeg" // Importa el decodificador JPEG
 // _ "image/png"  // Importa el decodificador PNG

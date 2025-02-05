@@ -1,4 +1,4 @@
-package pdf_invoice
+package invoices
 
 func (h *handler) setDefaultFont() {
 	h.pdf.SetFont(h.font_normal, "", 10)
